@@ -1,0 +1,20 @@
+// Andrew Han 227009495
+
+/**
+ * Adds or Subtracts two 4-bit values as discussed in class and described in the project document.
+ * You may have to implement some chips or additional logic to get all of the pieces you need
+ * out = a + b if sub==0
+         a - b if sub==1
+ */
+CHIP AddSub {
+    IN a[4], b[4], sub; //a and b are data inputs, sub=1 implies subtraction, sub=0 implies addition 
+    OUT out[4],carry;
+
+    PARTS:
+    Not(in = b[0], out = out0);
+	Not(in = b[1], out = out1);
+	Not(in = b[2], out = out2);
+	Not(in = b[3], out = out3);
+	Mux2way4(a = b, b[0] = out0, b[1] = out1, b[2] = out2, b[3] = out3, sel = sub, out = bmux);
+	Add4(a = a, b = bmux, carryIn = sub, out = out, carry = carry);
+}

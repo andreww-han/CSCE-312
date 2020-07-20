@@ -1,0 +1,14 @@
+// Andrew Han 227009495
+/**
+ * Construct an 6-bit RCA adder using 4-bit RCA only.  
+ */
+
+CHIP Add6 {
+    IN a[6], b[6], carryIn;
+    OUT out[6],carry;
+
+    PARTS:
+	Add4(a[0] = a[0], a[1] = a[1], a[2] = a[2], a[3] = a[3], b[0] = b[0], b[1] = b[1], b[2] = b[2], b[3] = b[3],
+		out[0] = out[0], out[1] = out[1], out[2] = out[2], out[3] = out[3], carryIn = carryIn, carry = carry1);
+	Add4(a[0] = a[4], a[1] = a[5], b[0] = b[4], b[1] = b[5], out[0] = out[4], out[1] = out[5], carryIn = carry1, out[2] = carry);
+}

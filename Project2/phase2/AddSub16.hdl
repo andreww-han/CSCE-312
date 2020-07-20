@@ -1,0 +1,14 @@
+//Andrew Han 227009495
+
+//16-bit version of AddSub
+
+
+CHIP AddSub16 {
+    IN a[16], b[16], sub; //a and b are data inputs, sub=1 implies subtraction, sub=0 implies addition 
+    OUT out[16],carry;
+
+    PARTS:
+	Not16(in = b, out = notb);
+	Mux16(a = b, b = notb, sel = sub, out = bmux);
+	Add16Carry(a = a, b = bmux, carryIn = sub, out = out, carry = carry);
+}

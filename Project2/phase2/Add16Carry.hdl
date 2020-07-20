@@ -1,0 +1,19 @@
+//Andrew Han 227009495
+
+/**
+ * Adds two 16-bit values using modular adder techniques
+ * This version takes in a carry value
+ */
+
+CHIP Add16Carry{
+    IN a[16], b[16],carryIn;
+    OUT out[16], carry;
+
+    PARTS:
+	Add6(a[0] = a[0], a[1] = a[1], a[2] = a[2], a[3] = a[3], a[4] = a[4], a[5] = a[5], b[0] = b[0], b[1] = b[1], b[2] = b[2], b[3] = b[3],
+		b[4] = b[4], b[5] = b[5], out[0] = out[0], out[1] = out[1], out[2] = out[2], out[3] = out[3], out[4] = out[4], out[5] = out[5], carryIn = carryIn, carry = carry1);
+	Add6(a[0] = a[6], a[1] = a[7], a[2] = a[8], a[3] = a[9], a[4] = a[10], a[5] = a[11], b[0] = b[6], b[1] = b[7], b[2] = b[8], b[3] = b[9],
+		b[4] = b[10], b[5] = b[11], out[0] = out[6], out[1] = out[7], out[2] = out[8], out[3] = out[9], out[4] = out[10], out[5] = out[11], carryIn = carry1,	 carry = carry2);
+	Add4(a[0] = a[12], a[1] = a[13], a[2] = a[14], a[3] = a[15], b[0] = b[12], b[1] = b[13], b[2] = b[14], b[3] = b[15],
+		out[0] = out[12], out[1] = out[13], out[2] = out[14], out[3] = out[15], carryIn = carry2, carry = carry);
+}

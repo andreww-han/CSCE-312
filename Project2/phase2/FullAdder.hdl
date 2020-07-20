@@ -1,0 +1,20 @@
+//Andrew Han 227009495
+
+/**
+ * Computes the sum of three bits - two of which are primary data inputs and the third is a carry input
+ */
+
+CHIP FullAdder {
+    IN a, b, c;  // 1-bit inputs. a and b are data inputs and c is carry-in input 
+    OUT sum,     // This is sum bit generated as a result of performing a + b + c 
+        carry;   // This is carry-out generated as a result of performing a + b + c
+
+    PARTS:
+    Xor(a = a, b = b, out = axorb);
+	Xor(a = axorb, b = c, out = sum);
+	And(a = a, b = b, out = ab);
+	And(a = a, b = c, out = ac);
+	And(a = b, b = c, out = bc);
+	Or(a = ab, b = ac, out = aborac);
+	Or(a = aborac, b = bc, out = carry);
+}

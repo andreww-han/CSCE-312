@@ -1,0 +1,86 @@
+//Andrew Han 227009495
+
+//LeftLogicBitshift.hdl
+
+/**
+ * Shift x left by y bits, new bits are filled in with 0
+ * You may assume the maximum shift is 8 bits (in other words, y is in the binary range 0000000000000000 to 0000000000001000)
+ */
+
+CHIP LeftLogicBitshift {
+    IN x[16], y[16];
+    OUT out[16];
+
+    PARTS:
+	//first set of shifts for y[0]. Shift by 1
+	Mux(a = x[15], b = x[14], sel = y[0], out = firstshift1);
+	Mux(a = x[14], b = x[13], sel = y[0], out = firstshift2);
+	Mux(a = x[13], b = x[12], sel = y[0], out = firstshift3);
+	Mux(a = x[12], b = x[11], sel = y[0], out = firstshift4);
+	Mux(a = x[11], b = x[10], sel = y[0], out = firstshift5);
+	Mux(a = x[10], b = x[9], sel = y[0], out = firstshift6);
+	Mux(a = x[9], b = x[8], sel = y[0], out = firstshift7);
+	Mux(a = x[8], b = x[7], sel = y[0], out = firstshift8);
+	Mux(a = x[7], b = x[6], sel = y[0], out = firstshift9);
+	Mux(a = x[6], b = x[5], sel = y[0], out = firstshift10);
+	Mux(a = x[5], b = x[4], sel = y[0], out = firstshift11);
+	Mux(a = x[4], b = x[3], sel = y[0], out = firstshift12);
+	Mux(a = x[3], b = x[2], sel = y[0], out = firstshift13);
+	Mux(a = x[2], b = x[1], sel = y[0], out = firstshift14);
+	Mux(a = x[1], b = x[0], sel = y[0], out = firstshift15);
+	Mux(a = x[0], b = false, sel = y[0], out = firstshift16);
+	
+	//second set of shifts for y[1]. Shift by 2
+	Mux(a = firstshift1, b = firstshift3, sel = y[1], out = secondshift1);
+	Mux(a = firstshift2, b = firstshift4, sel = y[1], out = secondshift2);
+	Mux(a = firstshift3, b = firstshift5, sel = y[1], out = secondshift3);
+	Mux(a = firstshift4, b = firstshift6, sel = y[1], out = secondshift4);
+	Mux(a = firstshift5, b = firstshift7, sel = y[1], out = secondshift5);
+	Mux(a = firstshift6, b = firstshift8, sel = y[1], out = secondshift6);
+	Mux(a = firstshift7, b = firstshift9, sel = y[1], out = secondshift7);
+	Mux(a = firstshift8, b = firstshift10, sel = y[1], out = secondshift8);
+	Mux(a = firstshift9, b = firstshift11, sel = y[1], out = secondshift9);
+	Mux(a = firstshift10, b = firstshift12, sel = y[1], out = secondshift10);
+	Mux(a = firstshift11, b = firstshift13, sel = y[1], out = secondshift11);
+	Mux(a = firstshift12, b = firstshift14, sel = y[1], out = secondshift12);
+	Mux(a = firstshift13, b = firstshift15, sel = y[1], out = secondshift13);
+	Mux(a = firstshift14, b = firstshift16, sel = y[1], out = secondshift14);
+	Mux(a = firstshift15, b = false, sel = y[1], out = secondshift15);
+	Mux(a = firstshift16, b = false, sel = y[1], out = secondshift16);
+	
+	//third set of shifts for y[2]. Shift by 4
+	Mux(a = secondshift1, b = secondshift5, sel = y[2], out = thirdshift1);
+	Mux(a = secondshift2, b = secondshift6, sel = y[2], out = thirdshift2);
+	Mux(a = secondshift3, b = secondshift7, sel = y[2], out = thirdshift3);
+	Mux(a = secondshift4, b = secondshift8, sel = y[2], out = thirdshift4);
+	Mux(a = secondshift5, b = secondshift9, sel = y[2], out = thirdshift5);
+	Mux(a = secondshift6, b = secondshift10, sel = y[2], out = thirdshift6);
+	Mux(a = secondshift7, b = secondshift11, sel = y[2], out = thirdshift7);
+	Mux(a = secondshift8, b = secondshift12, sel = y[2], out = thirdshift8);
+	Mux(a = secondshift9, b = secondshift13, sel = y[2], out = thirdshift9);
+	Mux(a = secondshift10, b = secondshift14, sel = y[2], out = thirdshift10);
+	Mux(a = secondshift11, b = secondshift15, sel = y[2], out = thirdshift11);
+	Mux(a = secondshift12, b = secondshift16, sel = y[2], out = thirdshift12);
+	Mux(a = secondshift13, b = false, sel = y[2], out = thirdshift13);
+	Mux(a = secondshift14, b = false, sel = y[2], out = thirdshift14);
+	Mux(a = secondshift15, b = false, sel = y[2], out = thirdshift15);
+	Mux(a = secondshift16, b = false, sel = y[2], out = thirdshift16);
+	
+	//fourth set of shifts for y[3]. Shift by 8
+	Mux(a = thirdshift1, b = thirdshift9, sel = y[3], out = out[15]);
+	Mux(a = thirdshift2, b = thirdshift10, sel = y[3], out = out[14]);
+	Mux(a = thirdshift3, b = thirdshift11, sel = y[3], out = out[13]);
+	Mux(a = thirdshift4, b = thirdshift12, sel = y[3], out = out[12]);
+	Mux(a = thirdshift5, b = thirdshift13, sel = y[3], out = out[11]);
+	Mux(a = thirdshift6, b = thirdshift14, sel = y[3], out = out[10]);
+	Mux(a = thirdshift7, b = thirdshift15, sel = y[3], out = out[9]);
+	Mux(a = thirdshift8, b = thirdshift16, sel = y[3], out = out[8]);
+	Mux(a = thirdshift9, b = false, sel = y[3], out = out[7]);
+	Mux(a = thirdshift10, b = false, sel = y[3], out = out[6]);
+	Mux(a = thirdshift11, b = false, sel = y[3], out = out[5]);
+	Mux(a = thirdshift12, b = false, sel = y[3], out = out[4]);
+	Mux(a = thirdshift13, b = false, sel = y[3], out = out[3]);
+	Mux(a = thirdshift14, b = false, sel = y[3], out = out[2]);
+	Mux(a = thirdshift15, b = false, sel = y[3], out = out[1]);
+	Mux(a = thirdshift16, b = false, sel = y[3], out = out[0]);
+}
