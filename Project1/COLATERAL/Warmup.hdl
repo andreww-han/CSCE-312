@@ -1,0 +1,13 @@
+/** Chip to implement Problem1 
+ */
+
+//Functionality Z = B + C'
+
+CHIP Warmup{
+    IN B, C; 
+    OUT Z;
+
+    PARTS:
+    Not(in = C, out = notC);
+	Or(a = B, b = notC, out = Z);
+}

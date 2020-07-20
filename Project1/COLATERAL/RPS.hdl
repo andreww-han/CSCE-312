@@ -1,0 +1,24 @@
+// Rock Paper Scissors Chip 
+// A`BCD + AB`C`D + ABCD`
+
+CHIP RPS {
+    IN p1[2], p2[2];
+    OUT out;
+	
+    PARTS:
+    Not(in = p1[1], out = notA);
+	And(a = notA, b = p1[0], out = notAB);
+	And(a = notAB, b = p2[1], out = notABC);
+	And(a = notABC, b = p2[0], out = notABCD);
+	Not(in = p1[0], out = notB);
+	Not(in = p2[1], out = notC);
+	And(a = p1[1], b = notB, out = aNotB);
+	And(a = aNotB, b = notC, out = aNotBNotC);
+	And(a = aNotBNotC, b = p2[0], out = aNotBNotCD);
+	Not(in = p2[0], out = notD);
+	And(a = p1[1], b = p1[0], out = AB);
+	And(a = AB, b = p2[1], out = ABC);
+	And(a = ABC, b = notD, out = ABCNotD);
+	Or(a = notABCD, b = aNotBNotCD, out = firstOr);
+	Or(a = firstOr, b = ABCNotD, out = out);
+}

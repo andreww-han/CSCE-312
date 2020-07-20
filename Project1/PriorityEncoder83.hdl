@@ -1,0 +1,17 @@
+//8 to 3 Priority Encoder
+//Andrew Han
+
+CHIP PriorityEncoder83{
+	IN d[8];
+	OUT o[3];
+	
+	PARTS:
+	Or(a = d[1], b = d[3], out = or13);
+	Or(a = d[5], b = d[7], out = or57);
+	Or(a = or13, b = or57, out = o[0]);
+	Or(a = d[2], b = d[3], out = or23);
+	Or(a = d[6], b = d[7], out = or67);
+	Or(a = or23, b = or67, out = o[1]);
+	Or(a = d[4], b = d[5], out = or45);
+	Or(a = or45, b = or67, out = o[2]);
+}

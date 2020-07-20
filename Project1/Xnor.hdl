@@ -1,0 +1,22 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Xnor.hdl
+// Andrew Han
+
+/**
+ * Exclusive-Nor gate:
+ * out = (a == b)
+ */
+
+CHIP Xnor {
+    IN a, b;
+    OUT out;
+
+    PARTS:
+	Not(in = a, out = notA);
+	Not(in = b, out = notB);
+	And(a = a, b = b, out = AB);
+	And(a = notA, b = notB, out = notAnotB);
+	Or(a = AB, b = notAnotB, out = out);
+}
